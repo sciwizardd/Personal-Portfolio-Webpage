@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emplo.io — AI Avatar Studio Kazakhstan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-dark': '#000a08',
+            'bg-nav': '#192220',
+            'blue-accent': '#0b66ff',
+          },
+          fontFamily: {
+            'urbanist': ['Urbanist', 'sans-serif'],
+            'inter': ['Inter', 'sans-serif'],
+          },
+          fontSize: {
+            'h1': ['84px', { lineHeight: '1.1', letterSpacing: '-0.84px' }],
+            'h2': ['60px', { lineHeight: '1.2', letterSpacing: '-0.6px' }],
+            'h4': ['40px', { lineHeight: '1.3', letterSpacing: '-0.4px' }],
+            'h5': ['32px', { lineHeight: '1.3', letterSpacing: '-0.32px' }],
+            'h6': ['26px', { lineHeight: '1.4', letterSpacing: '-0.26px' }],
+            'body-md': ['20px', { lineHeight: '1.5' }],
+            'body': ['18px', { lineHeight: '1.5' }],
+            'small': ['16px', { lineHeight: '1.5' }],
+          },
+          borderRadius: {
+            '4xl': '40px',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-urbanist { font-family: 'Urbanist', sans-serif; }
+  </style>
+</head>
+<body class="bg-[#000a08] text-white">
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="bg-[#192220] w-full sticky top-0 z-50">
+    <div class="max-w-[1440px] mx-auto px-16 h-[72px] flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center">
+        <img
+          src="https://www.figma.com/api/mcp/asset/08a27470-3910-4ddc-bda9-9a5619e92cbc"
+          alt="Emplo.io Logo"
+          class="h-9 w-auto"
+        />
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <div class="flex items-center gap-8 text-body text-white font-inter">
+          <a href="#work" class="hover:text-white/70 transition-colors">Our work</a>
+          <a href="#services" class="hover:text-white/70 transition-colors">Services</a>
+          <a href="#pricing" class="hover:text-white/70 transition-colors">Pricing</a>
+          <div class="flex items-center gap-1 cursor-pointer hover:text-white/70 transition-colors">
+            <span>Resources</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="#contact" class="border border-white/20 rounded-xl px-4 py-2 text-small font-medium font-inter hover:bg-white/5 transition-colors">
+            Contact
+          </a>
+          <a href="#contact" class="bg-[#0b66ff] border border-[#0b66ff] rounded-xl px-4 py-2 text-small font-medium font-inter hover:bg-blue-700 transition-colors">
+            Start
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="md:hidden text-white" id="mobile-menu-btn" aria-label="Open menu">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#192220] border-t border-white/10 px-6 pb-6">
+      <div class="flex flex-col gap-4 pt-4 text-body font-inter">
+        <a href="#work" class="hover:text-white/70 transition-colors">Our work</a>
+        <a href="#services" class="hover:text-white/70 transition-colors">Services</a>
+        <a href="#pricing" class="hover:text-white/70 transition-colors">Pricing</a>
+        <a href="#" class="hover:text-white/70 transition-colors">Resources</a>
+        <div class="flex gap-3 pt-2">
+          <a href="#contact" class="border border-white/20 rounded-xl px-4 py-2 text-small font-medium hover:bg-white/5 transition-colors">Contact</a>
+          <a href="#contact" class="bg-[#0b66ff] rounded-xl px-4 py-2 text-small font-medium hover:bg-blue-700 transition-colors">Start</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO / HEADER ===================== -->
+  <section class="bg-[#000a08] px-16 py-28 max-sm:px-5 max-sm:py-16">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-20">
+      <!-- Text + CTA -->
+      <div class="max-w-[768px] flex flex-col gap-8">
+        <div class="flex flex-col gap-6 text-white">
+          <h1 class="font-urbanist font-bold text-[84px] max-md:text-[52px] max-sm:text-[40px] leading-[1.1] tracking-[-0.84px]">
+            Your business deserves a digital face
+          </h1>
+          <p class="text-[20px] leading-[1.5] font-inter">
+            We craft intelligent avatars that speak for your brand. In Kazakhstan and beyond, businesses trust us to bring their vision to life with cutting-edge AI technology.
+          </p>
+        </div>
+        <div class="flex gap-4 flex-wrap">
+          <a href="#work" class="bg-[#0b66ff] border border-[#0b66ff] rounded-xl px-5 py-2.5 text-body font-medium font-inter hover:bg-blue-700 transition-colors">
+            Create
+          </a>
+          <a href="#services" class="border border-white/20 rounded-xl px-5 py-2.5 text-body font-medium font-inter hover:bg-white/5 transition-colors">
+            Explore
+          </a>
+        </div>
+      </div>
+
+      <!-- 3-image grid -->
+      <div class="flex gap-8 items-end max-md:flex-col max-md:items-stretch">
+        <!-- Left small image -->
+        <div class="shrink-0 max-md:hidden">
+          <img
+            src="https://www.figma.com/api/mcp/asset/5058211b-3139-4c7b-a343-89c6deebee7d"
+            alt="Avatar portrait"
+            class="w-[270px] h-[270px] object-cover rounded-[40px]"
+          />
+        </div>
+        <!-- Center large image -->
+        <div class="flex-1 py-[106px] max-md:py-0">
+          <img
+            src="https://www.figma.com/api/mcp/asset/2a1b38eb-94bb-43c7-b5d3-8a19d591abde"
+            alt="Avatar showcase"
+            class="w-full h-[472px] max-md:h-[300px] object-cover rounded-[40px]"
+          />
+        </div>
+        <!-- Right small image -->
+        <div class="shrink-0 max-md:hidden">
+          <img
+            src="https://www.figma.com/api/mcp/asset/78f9488c-43c1-4789-862f-f01d91112582"
+            alt="Avatar portrait"
+            class="w-[270px] h-[360px] object-cover rounded-[40px]"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHAT WE BUILD ===================== -->
+  <section id="work" class="bg-[#000a08] px-16 py-28 max-sm:px-5 max-sm:py-16">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-20 items-center">
+      <!-- Section title -->
+      <div class="max-w-[768px] flex flex-col gap-4 items-center text-center">
+        <span class="text-small font-semibold font-inter text-white">Capability</span>
+        <div class="flex flex-col gap-6 text-white">
+          <h2 class="font-urbanist font-bold text-[60px] max-md:text-[40px] max-sm:text-[32px] leading-[1.2] tracking-[-0.6px]">
+            What we build
+          </h2>
+          <p class="text-[20px] leading-[1.5] font-inter">
+            Three core offerings shape our work with clients
+          </p>
+        </div>
+      </div>
+
+      <!-- 3 cards -->
+      <div class="flex gap-8 w-full max-md:flex-col">
+        <!-- Card 1: Realism -->
+        <div class="flex-1 h-[630px] max-md:h-[480px] relative rounded-[40px] overflow-hidden flex flex-col justify-end p-8">
+          <img
+            src="https://www.figma.com/api/mcp/asset/78f9488c-43c1-4789-862f-f01d91112582"
+            alt="Custom design"
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-black/40 rounded-[40px]"></div>
+          <div class="relative z-10 flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+              <span class="text-small font-semibold font-inter text-white">Realism</span>
+              <h3 class="font-urbanist font-bold text-[40px] leading-[1.3] tracking-[-0.4px] text-white">
+                Custom design
+              </h3>
+            </div>
+            <div class="flex flex-col gap-8">
+              <p class="text-body font-inter text-white">
+                Photorealistic avatars that capture every detail of human presence
+              </p>
+              <a href="#" class="flex items-center gap-2 text-body font-medium font-inter text-white hover:text-white/70 transition-colors">
+                Explore
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Customization -->
+        <div class="flex-1 h-[630px] max-md:h-[480px] relative rounded-[40px] overflow-hidden flex flex-col justify-end p-8">
+          <img
+            src="https://www.figma.com/api/mcp/asset/43aa5e57-4632-4ceb-b8e2-0d3306a59e3d"
+            alt="Custom design"
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-black/40 rounded-[40px]"></div>
+          <div class="relative z-10 flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+              <span class="text-small font-semibold font-inter text-white">Customization</span>
+              <h3 class="font-urbanist font-bold text-[40px] leading-[1.3] tracking-[-0.4px] text-white">
+                Custom design
+              </h3>
+            </div>
+            <div class="flex flex-col gap-8">
+              <p class="text-body font-inter text-white">
+                Tailored designs that reflect your brand identity and vision
+              </p>
+              <a href="#" class="flex items-center gap-2 text-body font-medium font-inter text-white hover:text-white/70 transition-colors">
+                Explore
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Integration -->
+        <div class="flex-1 h-[630px] max-md:h-[480px] relative rounded-[40px] overflow-hidden flex flex-col justify-end p-8">
+          <img
+            src="https://www.figma.com/api/mcp/asset/dcb64803-f155-4c6e-8fc6-9cde8f6470ff"
+            alt="Built to match your brand"
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-black/40 rounded-[40px]"></div>
+          <div class="relative z-10 flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+              <span class="text-small font-semibold font-inter text-white">Integration</span>
+              <h3 class="font-urbanist font-bold text-[40px] leading-[1.3] tracking-[-0.4px] text-white">
+                Built to match your brand
+              </h3>
+            </div>
+            <div class="flex flex-col gap-8">
+              <p class="text-body font-inter text-white">
+                Seamless deployment across your platforms and customer touchpoints
+              </p>
+              <a href="#" class="flex items-center gap-2 text-body font-medium font-inter text-white hover:text-white/70 transition-colors">
+                Explore
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW WE SERVE ===================== -->
+  <section id="services" class="bg-[#000a08] px-16 py-28 max-sm:px-5 max-sm:py-16">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-20 items-center">
+      <!-- Section title -->
+      <div class="max-w-[768px] flex flex-col gap-4 items-center text-center">
+        <span class="text-small font-semibold font-inter text-white">Services</span>
+        <div class="flex flex-col gap-6 text-white">
+          <h2 class="font-urbanist font-bold text-[60px] max-md:text-[40px] max-sm:text-[32px] leading-[1.2] tracking-[-0.6px]">
+            How we serve your business
+          </h2>
+          <p class="text-[20px] leading-[1.5] font-inter">
+            We handle the full scope of avatar creation, from initial concept through deployment. Our team manages everything so you can focus on what matters.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3-column layout -->
+      <div class="flex gap-12 items-center w-full max-md:flex-col">
+        <!-- Left column: 2 services -->
+        <div class="flex-1 flex flex-col gap-16 items-center">
+          <!-- Service 1 -->
+          <div class="flex flex-col gap-6 items-center text-center w-full">
+            <img
+              src="https://www.figma.com/api/mcp/asset/d6dab01e-9537-4940-9f92-73db7528b5ba"
+              alt="Avatar design"
+              class="w-12 h-12"
+            />
+            <div class="flex flex-col gap-4 text-white text-center">
+              <h4 class="font-urbanist font-bold text-[32px] leading-[1.3] tracking-[-0.32px]">
+                Avatar design
+              </h4>
+              <p class="text-body font-inter">
+                Synchronized speech and expressions for natural communication
+              </p>
+            </div>
+          </div>
+          <!-- Service 2 -->
+          <div class="flex flex-col gap-6 items-center text-center w-full">
+            <img
+              src="https://www.figma.com/api/mcp/asset/30150e06-5cb9-4aba-9f1d-ef6375fe734f"
+              alt="Animation work"
+              class="w-12 h-12"
+            />
+            <div class="flex flex-col gap-4 text-white text-center">
+              <h4 class="font-urbanist font-bold text-[32px] leading-[1.3] tracking-[-0.32px]">
+                Animation work
+              </h4>
+              <p class="text-body font-inter">
+                Seamless integration into your existing systems and platforms
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center image -->
+        <div class="shrink-0 max-md:w-full">
+          <img
+            src="https://www.figma.com/api/mcp/asset/6a7d7dc5-a6d5-4bae-9775-c96db981881b"
+            alt="Avatar demo"
+            class="w-[540px] h-[540px] max-md:w-full max-md:h-[360px] object-cover rounded-[40px]"
+          />
+        </div>
+
+        <!-- Right column: 2 services -->
+        <div class="flex-1 flex flex-col gap-16 items-center">
+          <!-- Service 3 -->
+          <div class="flex flex-col gap-6 items-center text-center w-full">
+            <img
+              src="https://www.figma.com/api/mcp/asset/318fa386-f1f0-49f2-9963-d3ea7b8975c6"
+              alt="Voice integration"
+              class="w-12 h-12"
+            />
+            <div class="flex flex-col gap-4 text-white text-center">
+              <h4 class="font-urbanist font-bold text-[32px] leading-[1.3] tracking-[-0.32px]">
+                Voice integration
+              </h4>
+              <p class="text-body font-inter">
+                Avatar design
+              </p>
+            </div>
+          </div>
+          <!-- Service 4 -->
+          <div class="flex flex-col gap-6 items-center text-center w-full">
+            <img
+              src="https://www.figma.com/api/mcp/asset/3d020cd6-033d-481c-a642-e080c2728f38"
+              alt="Technical setup"
+              class="w-12 h-12"
+            />
+            <div class="flex flex-col gap-4 text-white text-center">
+              <h4 class="font-urbanist font-bold text-[32px] leading-[1.3] tracking-[-0.32px]">
+                Technical setup
+              </h4>
+              <p class="text-body font-inter">
+                Synchronized speech and expressions for natural communication
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA buttons -->
+      <div class="flex gap-6 items-center flex-wrap justify-center">
+        <a href="#" class="border border-white/20 rounded-xl px-5 py-2.5 text-body font-medium font-inter hover:bg-white/5 transition-colors">
+          Explore
+        </a>
+        <a href="#" class="flex items-center gap-2 text-body font-medium font-inter text-white hover:text-white/70 transition-colors">
+          Learn
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRICING ===================== -->
+  <section id="pricing" class="bg-[#000a08] px-16 py-28 max-sm:px-5 max-sm:py-16">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-20 items-center">
+      <!-- Section title -->
+      <div class="max-w-[768px] flex flex-col gap-4 items-center text-center">
+        <span class="text-small font-semibold font-inter text-white">Pricing</span>
+        <div class="flex flex-col gap-6 text-white">
+          <h2 class="font-urbanist font-bold text-[60px] max-md:text-[40px] max-sm:text-[32px] leading-[1.2] tracking-[-0.6px]">
+            Simple plans
+          </h2>
+          <p class="text-[20px] leading-[1.5] font-inter">
+            Choose what works for your needs
+          </p>
+        </div>
+      </div>
+
+      <!-- Pricing cards -->
+      <div class="flex gap-8 max-w-[1024px] w-full max-md:flex-col">
+        <!-- Starter plan -->
+        <div class="flex-1 border border-white/20 rounded-[40px] p-8 flex flex-col justify-between gap-8">
+          <div class="flex flex-col gap-8 items-center text-center">
+            <div class="flex flex-col gap-2 text-white w-full">
+              <h5 class="font-urbanist font-bold text-[26px] leading-[1.4] tracking-[-0.26px]">
+                Starter plan
+              </h5>
+              <p class="font-urbanist font-bold text-[84px] max-md:text-[60px] leading-[1.1] tracking-[-0.84px]">
+                $999
+              </p>
+              <p class="text-body font-inter text-white/70">
+                or $89 monthly
+              </p>
+            </div>
+            <div class="flex flex-col gap-4 w-full py-2">
+              <div class="flex gap-4 items-start">
+                <img src="https://www.figma.com/api/mcp/asset/517a7c27-5bd1-4c69-aa77-7a3a6fa292be" alt="check" class="w-6 h-6 shrink-0 mt-0.5" />
+                <p class="text-body font-inter text-white text-left">Single avatar creation</p>
+              </div>
+              <div class="flex gap-4 items-start">
+                <img src="https://www.figma.com/api/mcp/asset/517a7c27-5bd1-4c69-aa77-7a3a6fa292be" alt="check" class="w-6 h-6 shrink-0 mt-0.5" />
+                <p class="text-body font-inter text-white text-left">Basic animation package</p>
+              </div>
+              <div class="flex gap-4 items-start">
+                <img src="https://www.figma.com/api/mcp/asset/517a7c27-5bd1-4c69-aa77-7a3a6fa292be" alt="check" class="w-6 h-6 shrink-0 mt-0.5" />
+                <p class="text-body font-inter text-white text-left">Standard delivery time</p>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="w-full bg-[#0b66ff] border border-[#0b66ff] rounded-xl px-5 py-2.5 text-body font-medium font-inter text-white text-center hover:bg-blue-700 transition-colors">
+            Get started
+          </a>
+        </div>
+
+        <!-- Professional plan -->
+        <div class="flex-1 border border-white/20 rounded-[40px] p-8 flex flex-col justify-between gap-8">
+          <div class="flex flex-col gap-8 items-center text-center">
+            <div class="flex flex-col gap-2 text-white w-full">
+              <h5 class="font-urbanist font-bold text-[26px] leading-[1.4] tracking-[-0.26px]">
+                Professional plan
+              </h5>
+              <p class="font-urbanist font-bold text-[84px] max-md:text-[60px] leading-[1.1] tracking-[-0.84px]">
+                $2499
+              </p>
+              <p class="text-body font-inter text-white/70">
+                or $199 monthly
+              </p>
+            </div>
+            <div class="flex flex-col gap-4 w-full py-2">
+              <div class="flex gap-4 items-start">
+                <img src="https://www.figma.com/api/mcp/asset/517a7c27-5bd1-4c69-aa77-7a3a6fa292be" alt="check" class="w-6 h-6 shrink-0 mt-0.5" />
+                <p class="text-body font-inter text-white text-left">Up to three avatars</p>
+              </div>
+              <div class="flex gap-4 items-start">
+                <img src="https://www.figma.com/api/mcp/asset/517a7c27-5bd1-4c69-aa77-7a3a6fa292be" alt="check" class="w-6 h-6 shrink-0 mt-0.5" />
+                <p class="text-body font-inter text-white text-left">Advanced animation suite</p>
+              </div>
+              <div class="flex gap-4 items-start">
+                <img src="https://www.figma.com/api/mcp/asset/517a7c27-5bd1-4c69-aa77-7a3a6fa292be" alt="check" class="w-6 h-6 shrink-0 mt-0.5" />
+                <p class="text-body font-inter text-white text-left">Voice synchronization</p>
+              </div>
+              <div class="flex gap-4 items-start">
+                <img src="https://www.figma.com/api/mcp/asset/517a7c27-5bd1-4c69-aa77-7a3a6fa292be" alt="check" class="w-6 h-6 shrink-0 mt-0.5" />
+                <p class="text-body font-inter text-white text-left">Priority support</p>
+              </div>
+              <div class="flex gap-4 items-start">
+                <img src="https://www.figma.com/api/mcp/asset/517a7c27-5bd1-4c69-aa77-7a3a6fa292be" alt="check" class="w-6 h-6 shrink-0 mt-0.5" />
+                <p class="text-body font-inter text-white text-left">Unlimited avatar creation</p>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="w-full bg-[#0b66ff] border border-[#0b66ff] rounded-xl px-5 py-2.5 text-body font-medium font-inter text-white text-center hover:bg-blue-700 transition-colors">
+            Get started
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section id="contact" class="bg-[#000a08] px-16 py-28 max-sm:px-5 max-sm:py-16">
+    <div class="max-w-[1280px] mx-auto flex justify-center">
+      <div class="max-w-[768px] flex flex-col gap-8 items-center text-center">
+        <div class="flex flex-col gap-6 text-white">
+          <div class="font-urbanist font-bold text-[84px] max-md:text-[56px] max-sm:text-[40px] leading-[1.1] tracking-[-0.84px]">
+            <p>Ready to start</p>
+            <p>Let's build yours</p>
+          </div>
+          <p class="text-[20px] leading-[1.5] font-inter">
+            Get your avatar in motion. Contact us today for a consultation and pricing.
+          </p>
+        </div>
+        <div class="flex gap-4 flex-wrap justify-center">
+          <a href="mailto:pixton.geek@gmail.com" class="bg-[#0b66ff] border border-[#0b66ff] rounded-xl px-5 py-2.5 text-body font-medium font-inter hover:bg-blue-700 transition-colors">
+            Contact
+          </a>
+          <a href="#services" class="border border-white/20 rounded-xl px-5 py-2.5 text-body font-medium font-inter hover:bg-white/5 transition-colors">
+            Learn more
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="bg-[#000a08] px-16 py-20 max-sm:px-5 max-sm:py-12">
+    <div class="max-w-[1280px] mx-auto flex flex-col gap-20 items-center">
+      <!-- Logo + links -->
+      <div class="max-w-[480px] w-full flex flex-col gap-8 items-center">
+        <img
+          src="https://www.figma.com/api/mcp/asset/08a27470-3910-4ddc-bda9-9a5619e92cbc"
+          alt="Emplo.io"
+          class="h-9 w-auto"
+        />
+        <div class="flex flex-wrap gap-8 justify-center font-inter font-semibold text-small text-white">
+          <a href="#" class="hover:text-white/70 transition-colors">About us</a>
+          <a href="#work" class="hover:text-white/70 transition-colors">Our work</a>
+          <a href="#services" class="hover:text-white/70 transition-colors">Services</a>
+          <a href="#pricing" class="hover:text-white/70 transition-colors">Pricing</a>
+          <a href="#contact" class="hover:text-white/70 transition-colors">Contact</a>
+        </div>
+      </div>
+
+      <!-- Divider + credits -->
+      <div class="flex flex-col gap-8 w-full">
+        <div class="border-t border-white/20 w-full"></div>
+        <div class="flex justify-between items-center w-full font-inter text-small text-white flex-wrap gap-4">
+          <p>© 2025 AI Avatar Studio Kazakhstan. All rights reserved.</p>
+          <div class="flex gap-6 underline">
+            <a href="#" class="hover:text-white/70 transition-colors">Privacy policy</a>
+            <a href="#" class="hover:text-white/70 transition-colors">Terms of service</a>
+            <a href="#" class="hover:text-white/70 transition-colors">Cookie settings</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+    // Close on link click
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => menu.classList.add('hidden'));
+    });
+  </script>
+</body>
+</html>
