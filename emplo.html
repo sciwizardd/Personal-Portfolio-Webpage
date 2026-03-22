@@ -41,6 +41,141 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
     .font-urbanist { font-family: 'Urbanist', sans-serif; }
+
+    /* ===== Scroll Animations ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-80px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(80px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Stagger children */
+    .stagger-children > *:nth-child(1) { transition-delay: 0s; }
+    .stagger-children > *:nth-child(2) { transition-delay: 0.15s; }
+    .stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
+    .stagger-children > *:nth-child(4) { transition-delay: 0.45s; }
+    .stagger-children > *:nth-child(5) { transition-delay: 0.6s; }
+
+    /* ===== Photo Hover Animations ===== */
+    .photo-hover {
+      overflow: hidden;
+      position: relative;
+    }
+    .photo-hover img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .photo-hover:hover img {
+      transform: scale(1.08);
+      filter: brightness(1.1);
+    }
+
+    /* Shine overlay on hover */
+    .photo-hover::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+      );
+      transition: none;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .photo-hover:hover::after {
+      animation: shine 0.8s ease-out forwards;
+    }
+
+    @keyframes shine {
+      to { left: 150%; }
+    }
+
+    /* Card photo hover - darker overlay lifts */
+    .card-hover {
+      overflow: hidden;
+      position: relative;
+    }
+    .card-hover .card-overlay {
+      transition: background-color 0.5s ease;
+    }
+    .card-hover:hover .card-overlay {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+    .card-hover img.card-bg {
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.5s ease;
+    }
+    .card-hover:hover img.card-bg {
+      transform: scale(1.06);
+      filter: brightness(1.15) saturate(1.1);
+    }
+    .card-hover .card-content {
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-hover:hover .card-content {
+      transform: translateY(-8px);
+    }
+
+    /* Smooth page scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Parallax-like floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+    .float-animation-delay {
+      animation: float 6s ease-in-out 2s infinite;
+    }
   </style>
 </head>
 <body class="bg-[#000a08] text-white">
@@ -109,7 +244,7 @@
   <section class="bg-[#000a08] px-16 py-28 max-sm:px-5 max-sm:py-16">
     <div class="max-w-[1280px] mx-auto flex flex-col gap-20">
       <!-- Text + CTA -->
-      <div class="max-w-[768px] flex flex-col gap-8">
+      <div class="max-w-[768px] flex flex-col gap-8 reveal">
         <div class="flex flex-col gap-6 text-white">
           <h1 class="font-urbanist font-bold text-[84px] max-md:text-[52px] max-sm:text-[40px] leading-[1.1] tracking-[-0.84px]">
             Your business deserves a digital face
@@ -129,27 +264,29 @@
       </div>
 
       <!-- 3-image grid -->
-      <div class="flex gap-8 items-end max-md:flex-col max-md:items-stretch">
-        <!-- Left small image -->
-        <div class="shrink-0 max-md:hidden">
+      <div class="flex gap-8 items-end max-md:flex-col max-md:items-stretch stagger-children">
+        <!-- Left small image (photo-1: face close-up, brown hair) -->
+        <div class="shrink-0 max-md:hidden reveal-left photo-hover rounded-[40px]">
           <img
-            src="https://www.figma.com/api/mcp/asset/5058211b-3139-4c7b-a343-89c6deebee7d"
+            src="images/photo-1.jpg"
             alt="Avatar portrait"
             class="w-[270px] h-[270px] object-cover rounded-[40px]"
           />
         </div>
-        <!-- Center large image -->
-        <div class="flex-1 py-[106px] max-md:py-0">
-          <img
-            src="https://www.figma.com/api/mcp/asset/2a1b38eb-94bb-43c7-b5d3-8a19d591abde"
-            alt="Avatar showcase"
-            class="w-full h-[472px] max-md:h-[300px] object-cover rounded-[40px]"
-          />
+        <!-- Center large image (photo-2: black blazer) -->
+        <div class="flex-1 py-[106px] max-md:py-0 reveal-scale">
+          <div class="photo-hover rounded-[40px]">
+            <img
+              src="images/photo-2.jpg"
+              alt="Avatar showcase"
+              class="w-full h-[472px] max-md:h-[300px] object-cover rounded-[40px]"
+            />
+          </div>
         </div>
-        <!-- Right small image -->
-        <div class="shrink-0 max-md:hidden">
+        <!-- Right small image (photo-3: red/burgundy blazer) -->
+        <div class="shrink-0 max-md:hidden reveal-right photo-hover rounded-[40px]">
           <img
-            src="https://www.figma.com/api/mcp/asset/78f9488c-43c1-4789-862f-f01d91112582"
+            src="images/photo-3.jpg"
             alt="Avatar portrait"
             class="w-[270px] h-[360px] object-cover rounded-[40px]"
           />
@@ -162,7 +299,7 @@
   <section id="work" class="bg-[#000a08] px-16 py-28 max-sm:px-5 max-sm:py-16">
     <div class="max-w-[1280px] mx-auto flex flex-col gap-20 items-center">
       <!-- Section title -->
-      <div class="max-w-[768px] flex flex-col gap-4 items-center text-center">
+      <div class="max-w-[768px] flex flex-col gap-4 items-center text-center reveal">
         <span class="text-small font-semibold font-inter text-white">Capability</span>
         <div class="flex flex-col gap-6 text-white">
           <h2 class="font-urbanist font-bold text-[60px] max-md:text-[40px] max-sm:text-[32px] leading-[1.2] tracking-[-0.6px]">
@@ -175,16 +312,16 @@
       </div>
 
       <!-- 3 cards -->
-      <div class="flex gap-8 w-full max-md:flex-col">
-        <!-- Card 1: Realism -->
-        <div class="flex-1 h-[630px] max-md:h-[480px] relative rounded-[40px] overflow-hidden flex flex-col justify-end p-8">
+      <div class="flex gap-8 w-full max-md:flex-col stagger-children">
+        <!-- Card 1: Realism (photo-4: asian face close-up) -->
+        <div class="flex-1 h-[630px] max-md:h-[480px] relative rounded-[40px] overflow-hidden flex flex-col justify-end p-8 card-hover reveal">
           <img
-            src="https://www.figma.com/api/mcp/asset/78f9488c-43c1-4789-862f-f01d91112582"
+            src="images/photo-4.jpg"
             alt="Custom design"
-            class="absolute inset-0 w-full h-full object-cover"
+            class="absolute inset-0 w-full h-full object-cover card-bg"
           />
-          <div class="absolute inset-0 bg-black/40 rounded-[40px]"></div>
-          <div class="relative z-10 flex flex-col gap-6">
+          <div class="absolute inset-0 bg-black/40 rounded-[40px] card-overlay"></div>
+          <div class="relative z-10 flex flex-col gap-6 card-content">
             <div class="flex flex-col gap-2">
               <span class="text-small font-semibold font-inter text-white">Realism</span>
               <h3 class="font-urbanist font-bold text-[40px] leading-[1.3] tracking-[-0.4px] text-white">
@@ -205,15 +342,15 @@
           </div>
         </div>
 
-        <!-- Card 2: Customization -->
-        <div class="flex-1 h-[630px] max-md:h-[480px] relative rounded-[40px] overflow-hidden flex flex-col justify-end p-8">
+        <!-- Card 2: Customization (photo-5: wet black hair, white shirt) -->
+        <div class="flex-1 h-[630px] max-md:h-[480px] relative rounded-[40px] overflow-hidden flex flex-col justify-end p-8 card-hover reveal">
           <img
-            src="https://www.figma.com/api/mcp/asset/43aa5e57-4632-4ceb-b8e2-0d3306a59e3d"
+            src="images/photo-5.jpg"
             alt="Custom design"
-            class="absolute inset-0 w-full h-full object-cover"
+            class="absolute inset-0 w-full h-full object-cover card-bg"
           />
-          <div class="absolute inset-0 bg-black/40 rounded-[40px]"></div>
-          <div class="relative z-10 flex flex-col gap-6">
+          <div class="absolute inset-0 bg-black/40 rounded-[40px] card-overlay"></div>
+          <div class="relative z-10 flex flex-col gap-6 card-content">
             <div class="flex flex-col gap-2">
               <span class="text-small font-semibold font-inter text-white">Customization</span>
               <h3 class="font-urbanist font-bold text-[40px] leading-[1.3] tracking-[-0.4px] text-white">
@@ -234,15 +371,15 @@
           </div>
         </div>
 
-        <!-- Card 3: Integration -->
-        <div class="flex-1 h-[630px] max-md:h-[480px] relative rounded-[40px] overflow-hidden flex flex-col justify-end p-8">
+        <!-- Card 3: Integration (photo-1: face close-up) -->
+        <div class="flex-1 h-[630px] max-md:h-[480px] relative rounded-[40px] overflow-hidden flex flex-col justify-end p-8 card-hover reveal">
           <img
-            src="https://www.figma.com/api/mcp/asset/dcb64803-f155-4c6e-8fc6-9cde8f6470ff"
+            src="images/photo-1.jpg"
             alt="Built to match your brand"
-            class="absolute inset-0 w-full h-full object-cover"
+            class="absolute inset-0 w-full h-full object-cover card-bg"
           />
-          <div class="absolute inset-0 bg-black/40 rounded-[40px]"></div>
-          <div class="relative z-10 flex flex-col gap-6">
+          <div class="absolute inset-0 bg-black/40 rounded-[40px] card-overlay"></div>
+          <div class="relative z-10 flex flex-col gap-6 card-content">
             <div class="flex flex-col gap-2">
               <span class="text-small font-semibold font-inter text-white">Integration</span>
               <h3 class="font-urbanist font-bold text-[40px] leading-[1.3] tracking-[-0.4px] text-white">
@@ -270,7 +407,7 @@
   <section id="services" class="bg-[#000a08] px-16 py-28 max-sm:px-5 max-sm:py-16">
     <div class="max-w-[1280px] mx-auto flex flex-col gap-20 items-center">
       <!-- Section title -->
-      <div class="max-w-[768px] flex flex-col gap-4 items-center text-center">
+      <div class="max-w-[768px] flex flex-col gap-4 items-center text-center reveal">
         <span class="text-small font-semibold font-inter text-white">Services</span>
         <div class="flex flex-col gap-6 text-white">
           <h2 class="font-urbanist font-bold text-[60px] max-md:text-[40px] max-sm:text-[32px] leading-[1.2] tracking-[-0.6px]">
@@ -287,11 +424,11 @@
         <!-- Left column: 2 services -->
         <div class="flex-1 flex flex-col gap-16 items-center">
           <!-- Service 1 -->
-          <div class="flex flex-col gap-6 items-center text-center w-full">
+          <div class="flex flex-col gap-6 items-center text-center w-full reveal-left">
             <img
               src="https://www.figma.com/api/mcp/asset/d6dab01e-9537-4940-9f92-73db7528b5ba"
               alt="Avatar design"
-              class="w-12 h-12"
+              class="w-12 h-12 float-animation"
             />
             <div class="flex flex-col gap-4 text-white text-center">
               <h4 class="font-urbanist font-bold text-[32px] leading-[1.3] tracking-[-0.32px]">
@@ -303,11 +440,11 @@
             </div>
           </div>
           <!-- Service 2 -->
-          <div class="flex flex-col gap-6 items-center text-center w-full">
+          <div class="flex flex-col gap-6 items-center text-center w-full reveal-left">
             <img
               src="https://www.figma.com/api/mcp/asset/30150e06-5cb9-4aba-9f1d-ef6375fe734f"
               alt="Animation work"
-              class="w-12 h-12"
+              class="w-12 h-12 float-animation-delay"
             />
             <div class="flex flex-col gap-4 text-white text-center">
               <h4 class="font-urbanist font-bold text-[32px] leading-[1.3] tracking-[-0.32px]">
@@ -320,23 +457,25 @@
           </div>
         </div>
 
-        <!-- Center image -->
-        <div class="shrink-0 max-md:w-full">
-          <img
-            src="https://www.figma.com/api/mcp/asset/6a7d7dc5-a6d5-4bae-9775-c96db981881b"
-            alt="Avatar demo"
-            class="w-[540px] h-[540px] max-md:w-full max-md:h-[360px] object-cover rounded-[40px]"
-          />
+        <!-- Center image (photo-3: red blazer) -->
+        <div class="shrink-0 max-md:w-full reveal-scale">
+          <div class="photo-hover rounded-[40px]">
+            <img
+              src="images/photo-3.jpg"
+              alt="Avatar demo"
+              class="w-[540px] h-[540px] max-md:w-full max-md:h-[360px] object-cover rounded-[40px]"
+            />
+          </div>
         </div>
 
         <!-- Right column: 2 services -->
         <div class="flex-1 flex flex-col gap-16 items-center">
           <!-- Service 3 -->
-          <div class="flex flex-col gap-6 items-center text-center w-full">
+          <div class="flex flex-col gap-6 items-center text-center w-full reveal-right">
             <img
               src="https://www.figma.com/api/mcp/asset/318fa386-f1f0-49f2-9963-d3ea7b8975c6"
               alt="Voice integration"
-              class="w-12 h-12"
+              class="w-12 h-12 float-animation"
             />
             <div class="flex flex-col gap-4 text-white text-center">
               <h4 class="font-urbanist font-bold text-[32px] leading-[1.3] tracking-[-0.32px]">
@@ -348,11 +487,11 @@
             </div>
           </div>
           <!-- Service 4 -->
-          <div class="flex flex-col gap-6 items-center text-center w-full">
+          <div class="flex flex-col gap-6 items-center text-center w-full reveal-right">
             <img
               src="https://www.figma.com/api/mcp/asset/3d020cd6-033d-481c-a642-e080c2728f38"
               alt="Technical setup"
-              class="w-12 h-12"
+              class="w-12 h-12 float-animation-delay"
             />
             <div class="flex flex-col gap-4 text-white text-center">
               <h4 class="font-urbanist font-bold text-[32px] leading-[1.3] tracking-[-0.32px]">
@@ -367,7 +506,7 @@
       </div>
 
       <!-- CTA buttons -->
-      <div class="flex gap-6 items-center flex-wrap justify-center">
+      <div class="flex gap-6 items-center flex-wrap justify-center reveal">
         <a href="#" class="border border-white/20 rounded-xl px-5 py-2.5 text-body font-medium font-inter hover:bg-white/5 transition-colors">
           Explore
         </a>
@@ -385,7 +524,7 @@
   <section id="pricing" class="bg-[#000a08] px-16 py-28 max-sm:px-5 max-sm:py-16">
     <div class="max-w-[1280px] mx-auto flex flex-col gap-20 items-center">
       <!-- Section title -->
-      <div class="max-w-[768px] flex flex-col gap-4 items-center text-center">
+      <div class="max-w-[768px] flex flex-col gap-4 items-center text-center reveal">
         <span class="text-small font-semibold font-inter text-white">Pricing</span>
         <div class="flex flex-col gap-6 text-white">
           <h2 class="font-urbanist font-bold text-[60px] max-md:text-[40px] max-sm:text-[32px] leading-[1.2] tracking-[-0.6px]">
@@ -398,9 +537,9 @@
       </div>
 
       <!-- Pricing cards -->
-      <div class="flex gap-8 max-w-[1024px] w-full max-md:flex-col">
+      <div class="flex gap-8 max-w-[1024px] w-full max-md:flex-col stagger-children">
         <!-- Starter plan -->
-        <div class="flex-1 border border-white/20 rounded-[40px] p-8 flex flex-col justify-between gap-8">
+        <div class="flex-1 border border-white/20 rounded-[40px] p-8 flex flex-col justify-between gap-8 reveal hover:border-white/40 hover:shadow-[0_0_60px_rgba(11,102,255,0.1)] transition-all duration-500">
           <div class="flex flex-col gap-8 items-center text-center">
             <div class="flex flex-col gap-2 text-white w-full">
               <h5 class="font-urbanist font-bold text-[26px] leading-[1.4] tracking-[-0.26px]">
@@ -434,7 +573,7 @@
         </div>
 
         <!-- Professional plan -->
-        <div class="flex-1 border border-white/20 rounded-[40px] p-8 flex flex-col justify-between gap-8">
+        <div class="flex-1 border border-white/20 rounded-[40px] p-8 flex flex-col justify-between gap-8 reveal hover:border-white/40 hover:shadow-[0_0_60px_rgba(11,102,255,0.1)] transition-all duration-500">
           <div class="flex flex-col gap-8 items-center text-center">
             <div class="flex flex-col gap-2 text-white w-full">
               <h5 class="font-urbanist font-bold text-[26px] leading-[1.4] tracking-[-0.26px]">
@@ -481,7 +620,7 @@
   <!-- ===================== CTA ===================== -->
   <section id="contact" class="bg-[#000a08] px-16 py-28 max-sm:px-5 max-sm:py-16">
     <div class="max-w-[1280px] mx-auto flex justify-center">
-      <div class="max-w-[768px] flex flex-col gap-8 items-center text-center">
+      <div class="max-w-[768px] flex flex-col gap-8 items-center text-center reveal">
         <div class="flex flex-col gap-6 text-white">
           <div class="font-urbanist font-bold text-[84px] max-md:text-[56px] max-sm:text-[40px] leading-[1.1] tracking-[-0.84px]">
             <p>Ready to start</p>
@@ -507,7 +646,7 @@
   <footer class="bg-[#000a08] px-16 py-20 max-sm:px-5 max-sm:py-12">
     <div class="max-w-[1280px] mx-auto flex flex-col gap-20 items-center">
       <!-- Logo + links -->
-      <div class="max-w-[480px] w-full flex flex-col gap-8 items-center">
+      <div class="max-w-[480px] w-full flex flex-col gap-8 items-center reveal">
         <img
           src="https://www.figma.com/api/mcp/asset/08a27470-3910-4ddc-bda9-9a5619e92cbc"
           alt="Emplo.io"
@@ -523,10 +662,10 @@
       </div>
 
       <!-- Divider + credits -->
-      <div class="flex flex-col gap-8 w-full">
+      <div class="flex flex-col gap-8 w-full reveal">
         <div class="border-t border-white/20 w-full"></div>
         <div class="flex justify-between items-center w-full font-inter text-small text-white flex-wrap gap-4">
-          <p>© 2025 AI Avatar Studio Kazakhstan. All rights reserved.</p>
+          <p>&copy; 2025 AI Avatar Studio Kazakhstan. All rights reserved.</p>
           <div class="flex gap-6 underline">
             <a href="#" class="hover:text-white/70 transition-colors">Privacy policy</a>
             <a href="#" class="hover:text-white/70 transition-colors">Terms of service</a>
@@ -544,10 +683,25 @@
     btn.addEventListener('click', () => {
       menu.classList.toggle('hidden');
     });
-    // Close on link click
     menu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => menu.classList.add('hidden'));
     });
+
+    // ===== Scroll Reveal with Intersection Observer =====
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
   </script>
 </body>
 </html>
